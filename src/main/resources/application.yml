@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: InternetShop
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/InternetShop
+    username: internetshop
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+#jwt:
+#  key: ${JWT_KEY}
+#  access-token-expiration: 3600000
+#  refresh-token-expiration: 86400000
