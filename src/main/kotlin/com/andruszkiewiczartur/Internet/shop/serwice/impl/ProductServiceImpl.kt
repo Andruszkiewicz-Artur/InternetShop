@@ -10,12 +10,12 @@ class ProductServiceImpl(
     private val productRepository: ProductRepository
 ): ProductService {
 
-    override fun addProduct(product: ProductEntity): ProductEntity =
+    override fun upsertProduct(product: ProductEntity): ProductEntity =
         productRepository
             .save(product)
 
-    override fun updateProduct(product: ProductEntity): ProductEntity =
+    override fun getProducts(): List<ProductEntity> =
         productRepository
-            .save(product)
+            .findAll()
 
 }

@@ -1,5 +1,6 @@
 package com.andruszkiewiczartur.Internet.shop.domain.entity
 
+import com.andruszkiewiczartur.Internet.shop.domain.dto.order.OrderResponse
 import jakarta.persistence.*
 
 @Entity
@@ -18,4 +19,11 @@ data class OrderEntity(
     val products: List<QuantityEntity>,
 
     val isBuying: Boolean
-)
+) {
+    fun toResponse(): OrderResponse =
+        OrderResponse(
+            id = id,
+            products = products
+                .map { it.toResponse() }
+        )
+}

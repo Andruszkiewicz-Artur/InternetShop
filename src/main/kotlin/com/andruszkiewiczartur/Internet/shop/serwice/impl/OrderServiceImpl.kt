@@ -12,9 +12,11 @@ class OrderServiceImpl(
     private val userRepository: UserRepository
 ): OrderService {
 
-    override fun getOrder(orderId: Long): OrderEntity =
-        orderRepository
-            .getReferenceById(orderId)
+    override fun getOrder(email: String): OrderEntity =
+        userRepository
+            .getReferenceById(email)
+            .orders
+            .first { !it.isBuying }
 
     override fun getBuyingOrders(userEmail: String): List<OrderEntity> =
         userRepository

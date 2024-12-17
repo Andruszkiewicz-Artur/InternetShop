@@ -4,7 +4,7 @@ import com.andruszkiewiczartur.Internet.shop.domain.entity.OrderEntity
 import com.andruszkiewiczartur.Internet.shop.domain.entity.ProductEntity
 
 interface OrderService {
-    fun getOrder(orderId: Long): OrderEntity
+    fun getOrder(email: String): OrderEntity
 
     fun getBuyingOrders(userEmail: String): List<OrderEntity>
 

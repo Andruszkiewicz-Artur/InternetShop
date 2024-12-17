@@ -23,15 +23,6 @@ class QuantityServiceImpl(
             )
         )
 
-    override fun updateProduct(quantityId: Long, quantity: Int): QuantityEntity =
-        quantityRepository.save(
-            quantityRepository.
-            getReferenceById(quantityId)
-                .copy(
-                    quantity = quantity
-                )
-        )
-
     override fun deleteProduct(quantityId: Long) =
         quantityRepository.deleteById(quantityId)
 }

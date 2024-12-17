@@ -1,5 +1,6 @@
 package com.andruszkiewiczartur.Internet.shop.domain.entity
 
+import com.andruszkiewiczartur.Internet.shop.domain.dto.quantity.QuantityResponse
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
@@ -23,4 +24,11 @@ data class QuantityEntity(
     val product: ProductEntity,
 
     val quantity: Int
-)
+) {
+    fun toResponse(): QuantityResponse =
+        QuantityResponse(
+            id = id,
+            product = product.toDto(),
+            quantity = quantity
+        )
+}

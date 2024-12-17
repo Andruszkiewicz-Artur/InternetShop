@@ -43,16 +43,16 @@ dependencies {
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-database-postgresql")
 
-	//JWT Token
-	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
-	implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
-	implementation("io.jsonwebtoken:jjwt-jackson:0.12.6")
-
-	//Spring Security
-	implementation("org.springframework.boot:spring-boot-starter-security")
-
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework.security:spring-security-test")
+//	//JWT Token
+//	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+//	implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
+//	implementation("io.jsonwebtoken:jjwt-jackson:0.12.6")
+//
+//	//Spring Security
+//	implementation("org.springframework.boot:spring-boot-starter-security")
+//
+//	testImplementation("org.springframework.boot:spring-boot-starter-test")
+//	testImplementation("org.springframework.security:spring-security-test")
 }
 
 kotlin {

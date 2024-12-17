@@ -10,6 +10,12 @@ class UserServiceImpl(
     private val userRepository: UserRepository
 ): UserService {
 
-    override fun createUser(user: UserEntity): UserEntity = userRepository.save(user)
+    override fun createUser(user: UserEntity): UserEntity =
+        userRepository
+            .save(user)
+
+    override fun getUsers(): List<UserEntity> =
+        userRepository
+            .findAll()
 
 }
