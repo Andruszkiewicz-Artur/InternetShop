@@ -11,24 +11,26 @@ class OrderServiceImpl(
     private val orderRepository: OrderRepository,
     private val userRepository: UserRepository
 ): OrderService {
-
-    override fun getOrder(email: String): OrderEntity =
+    override fun getOrders(userEmail: String): List<OrderEntity> =
         userRepository
-            .getReferenceById(email)
-            .orders
-            .first { !it.isBuying }
+            .findAll()
+            .firstOrNull { it.email == userEmail }
+            ?.orders
+            ?.filter { it.isBuying == true }
+            ?: emptyList()
 
-    override fun getBuyingOrders(userEmail: String): List<OrderEntity> =
-        userRepository
-            .getReferenceById(userEmail)
-            .orders
-            .filter { it.isBuying == true }
-
-    override fun buyOrder(orderId: Long): OrderEntity =
-        orderRepository
-            .save(
-                orderRepository
-                    .getReferenceById(orderId)
-                    .copy(isBuying = true)
+    override fun buyOrder(orderId: Long): OrderEntity {
+        val order = orderRepository
+            .findById(orderId)
+            .get()
+            .copy(
+                isBuying = true
             )
+
+        if (order.products.isEmpty()) throw RuntimeException()
+
+        val newOrder = orderRepository.save(order)
+
+        return newOrder
+    }
 }

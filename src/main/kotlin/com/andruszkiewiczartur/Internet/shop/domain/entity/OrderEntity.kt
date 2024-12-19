@@ -10,10 +10,6 @@ data class OrderEntity(
     @GeneratedValue
     val id: Long = 0,
 
-    @ManyToOne
-    @JoinColumn(name = "user_email")
-    val user: UserEntity,
-
     @OneToMany
     @JoinColumn(name = "quantity_id")
     val products: List<QuantityEntity>,

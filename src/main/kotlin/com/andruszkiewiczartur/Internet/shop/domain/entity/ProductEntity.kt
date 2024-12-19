@@ -11,9 +11,6 @@ data class ProductEntity(
     val id: Long = 0,
     val name: String,
     val prize: Float,
-
-    @ManyToMany
-    val orders: List<OrderEntity> = mutableListOf()
 ) {
 
     fun toDto(): ProductDto =

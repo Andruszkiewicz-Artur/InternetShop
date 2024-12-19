@@ -10,7 +10,6 @@ data class ProductDto(
     fun toEntity(): ProductEntity =
         ProductEntity(
             name = name,
-            prize = prize,
-            orders = emptyList()
+            prize = prize
         )
 }

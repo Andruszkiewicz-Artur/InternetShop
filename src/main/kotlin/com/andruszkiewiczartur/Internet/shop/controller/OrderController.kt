@@ -13,44 +13,38 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(name = "/api/order")
+@RequestMapping("/api/order")
 class OrderController(
     private val orderService: OrderService,
     private val quantityService: QuantityService
 ) {
-
-    @GetMapping("/{email}")
-    fun getOrder(@PathVariable email: String): OrderResponse =
+    @GetMapping
+    fun getOrders(@RequestParam email: String): List<OrderResponse> =
         orderService
-            .getOrder(email)
-            .toResponse()
-
-    @GetMapping("s/{email}")
-    fun getBuyingOrders(@PathVariable email: String): List<OrderResponse> =
-        orderService
-            .getBuyingOrders(email)
+            .getOrders(email)
             .map {
                 it.toResponse()
             }
 
-    @PostMapping("/buy/{id}")
-    fun buyOrder(@PathVariable id: Long) =
+    @PostMapping("/buy")
+    fun buyOrder(@RequestParam id: Long) =
         orderService
             .buyOrder(id)
 
-    @PostMapping
+    @PostMapping("/product")
     fun addProduct(@RequestBody quantity: QuantityRequest) =
         quantityService.addProduct(
-            orderId = quantity.orderId,
+            email = quantity.email,
             productId = quantity.productId,
             quantity = quantity.quantity
         )
 
-    @DeleteMapping("/{id}")
-    fun deleteProduct(@PathVariable id: Long) =
+    @DeleteMapping("/product")
+    fun deleteProduct(@RequestParam id: Long) =
         quantityService
             .deleteProduct(id)
 }

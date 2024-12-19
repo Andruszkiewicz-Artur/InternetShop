@@ -1,13 +1,7 @@
 package com.andruszkiewiczartur.Internet.shop.domain.entity
 
 import com.andruszkiewiczartur.Internet.shop.domain.dto.quantity.QuantityResponse
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
-import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToOne
-import jakarta.persistence.Table
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "Quantities")
@@ -17,9 +11,6 @@ data class QuantityEntity(
     val id: Long = 0,
 
     @ManyToOne
-    val order: OrderEntity,
-
-    @OneToOne
     @JoinColumn(name = "product_id")
     val product: ProductEntity,
 
@@ -27,8 +18,8 @@ data class QuantityEntity(
 ) {
     fun toResponse(): QuantityResponse =
         QuantityResponse(
-            id = id,
             product = product.toDto(),
-            quantity = quantity
+            quantity = quantity,
+            id = id
         )
 }
