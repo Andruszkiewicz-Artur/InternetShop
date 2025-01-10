@@ -10,12 +10,24 @@ class UserServiceImpl(
     private val userRepository: UserRepository
 ): UserService {
 
-    override fun createUser(user: UserEntity): UserEntity =
-        userRepository
+    override fun createUser(user: UserEntity): UserEntity? {
+        val userInner = userRepository
+            .findAll()
+            .firstOrNull { user.email == it.email }
+
+        if (userInner != null) return null
+
+        return userRepository
             .save(user)
+    }
+
 
     override fun getUsers(): List<UserEntity> =
         userRepository
             .findAll()
 
+    override fun logInUser(email: String, password: String): UserEntity? =
+        userRepository
+            .findAll()
+            .firstOrNull { it.email == email && it.password == password }
 }

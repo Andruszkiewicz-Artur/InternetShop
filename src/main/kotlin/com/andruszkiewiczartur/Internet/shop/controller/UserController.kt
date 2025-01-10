@@ -1,5 +1,6 @@
 package com.andruszkiewiczartur.Internet.shop.controller
 
+import com.andruszkiewiczartur.Internet.shop.domain.dto.user.UserLoginRequest
 import com.andruszkiewiczartur.Internet.shop.domain.dto.user.UserRequest
 import com.andruszkiewiczartur.Internet.shop.domain.dto.user.UserResponse
 import com.andruszkiewiczartur.Internet.shop.serwice.UserService
@@ -17,8 +18,10 @@ class UserController(
 ) {
 
     @PostMapping
-    fun createUser(@RequestBody user: UserRequest) =
-        userService.createUser(user.toEntity())
+    fun createUser(@RequestBody user: UserRequest): UserResponse? =
+        userService
+            .createUser(user.toEntity())
+            ?.toResponse()
 
     @GetMapping
     fun getUsers(): List<UserResponse> =
@@ -27,4 +30,11 @@ class UserController(
             .map {
                 it.toResponse()
             }
+
+    @GetMapping("/login")
+    fun logInUser(@RequestBody userData: UserLoginRequest): UserResponse? =
+        userService
+            .logInUser(userData.email, userData.password)
+            ?.toResponse()
+
 }
