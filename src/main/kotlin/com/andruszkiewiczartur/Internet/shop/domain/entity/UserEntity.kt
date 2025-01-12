@@ -23,6 +23,7 @@ data class UserEntity(
             email = email,
             order = orders
                 .firstOrNull { !it.isBuying }
-                ?.toResponse()
+                ?.toResponse(),
+            status = status.name
         )
 }

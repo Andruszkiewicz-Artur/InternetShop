@@ -5,11 +5,7 @@ import com.andruszkiewiczartur.Internet.shop.domain.dto.user.UserRequest
 import com.andruszkiewiczartur.Internet.shop.domain.dto.user.UserResponse
 import com.andruszkiewiczartur.Internet.shop.serwice.UserService
 import com.andruszkiewiczartur.Internet.shop.serwice.impl.UserServiceImpl
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("api/user")
@@ -32,9 +28,9 @@ class UserController(
             }
 
     @GetMapping("/login")
-    fun logInUser(@RequestBody userData: UserLoginRequest): UserResponse? =
+    fun logInUser(@RequestParam email: String, @RequestParam password: String): UserResponse? =
         userService
-            .logInUser(userData.email, userData.password)
+            .logInUser(email, password)
             ?.toResponse()
 
 }
