@@ -25,4 +25,9 @@ class ProductController(
             .getProducts()
             .map { it.toDto() }
 
+    @DeleteMapping
+    fun deleteProduct(@RequestParam productId: Long): ProductDto? =
+        productService
+            .deleteProduct(productId)
+            ?.toDto()
 }
