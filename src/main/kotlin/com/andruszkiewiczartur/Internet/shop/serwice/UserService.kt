@@ -8,4 +8,6 @@ interface UserService {
     fun getUsers(): List<UserEntity>
 
     fun logInUser(email: String, password: String): UserEntity?
+
+    fun changePassword(email: String, oldPassword: String, newPassword: String): UserEntity?
 }

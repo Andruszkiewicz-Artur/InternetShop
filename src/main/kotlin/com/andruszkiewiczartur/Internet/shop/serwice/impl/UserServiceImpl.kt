@@ -30,4 +30,18 @@ class UserServiceImpl(
         userRepository
             .findAll()
             .firstOrNull { it.email == email && it.password == password }
+
+    override fun changePassword(email: String, oldPassword: String, newPassword: String): UserEntity? {
+        val user = userRepository
+            .findAll()
+            .firstOrNull { it.email == email && it.password == oldPassword }
+
+        return if (user != null) {
+            userRepository
+                .save(user.copy(
+                    password = newPassword
+                ))
+        }
+        else null
+    }
 }

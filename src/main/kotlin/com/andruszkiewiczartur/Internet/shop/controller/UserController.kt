@@ -33,4 +33,10 @@ class UserController(
             .logInUser(email, password)
             ?.toResponse()
 
+    @PutMapping("/changePassword")
+    fun changePassword(@RequestParam email: String, @RequestParam oldPassword: String, @RequestParam newPassword: String): UserResponse? =
+        userService
+            .changePassword(email, oldPassword, newPassword)
+            ?.toResponse()
+
 }
