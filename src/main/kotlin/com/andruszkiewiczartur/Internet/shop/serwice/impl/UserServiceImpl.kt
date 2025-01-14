@@ -44,4 +44,19 @@ class UserServiceImpl(
         }
         else null
     }
+
+    override fun updateUserData(user: UserEntity): UserEntity? {
+        val fullUser = userRepository
+            .findAll()
+            .firstOrNull { it.email == user.email }
+
+        return if (fullUser != null) {
+            userRepository.save(
+                fullUser.copy(
+                    password = user.password.ifBlank { fullUser.password },
+                    status = user.status
+                )
+            )
+        } else null
+    }
 }

@@ -10,4 +10,6 @@ interface UserService {
     fun logInUser(email: String, password: String): UserEntity?
 
     fun changePassword(email: String, oldPassword: String, newPassword: String): UserEntity?
+
+    fun updateUserData(user: UserEntity): UserEntity?
 }

@@ -39,4 +39,10 @@ class UserController(
             .changePassword(email, oldPassword, newPassword)
             ?.toResponse()
 
+    @PutMapping
+    fun updateUser(@RequestBody user: UserRequest): UserResponse? =
+        userService
+            .updateUserData(user = user.toEntity())
+            ?.toResponse()
+
 }
